@@ -69,16 +69,16 @@ each(dataPath("data[*]"),
       field("No_of_books_overdue__c", dataValue("no_books_outstanding"))
       )),
 each(
-      merge(dataPath("checkout_repeat[*]"),
-      combine(
-      field("whoID", dataValue("who"))),
-      dataPath("books_repeat[*]"),fields(
-      field("parentId", dataValue("instanceID")),
+      // merge(dataPath("checkout_repeat[*]"),fields(
+      // field("whoID", dataValue("who"))),
+      dataPath("books_repeat[*]"),
+      // fields(
+      // field("parentId", dataValue("instanceID")),
       create("Book_Checkout__c",fields(
       relationship("SPM_Book__r","Unique_ID__c",dataValue("scan")),
       relationship("Reporting__r","Unique_ID__c",dataValue("parentId")),
       relationship("Book_Checked_Out_By__r","Library_Card__c",dataValue("whoID")),
-      field("Checkout_Status__c", dataValue("book_status"))
+      field("Checkout_Status__c", dataValue("book_status")))
 
-)))))
+))))
 ));
